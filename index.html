@@ -1,54 +1,132 @@
-<script>
-  /* No button escape */
-  const noBtn = document.getElementById("no");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine 💕</title>
 
-  function moveNo() {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 60 - 30;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  }
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
 
-  noBtn.addEventListener("mouseover", moveNo);
-  noBtn.addEventListener("touchstart", moveNo);
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      z-index: 2;
+    }
 
-  /* YES button behavior */
-  function sayYes() {
-    // Show love message on page
-    const card = document.querySelector(".card");
-    card.innerHTML = `
-      <h1>Hima Darsini Reddy 💕</h1>
-      <h2>
-        You just made my heart smile 🥰<br><br>
-        I can’t wait to make beautiful memories with you 💖
-      </h2>
-      <p style="font-size:18px;color:#ff4d6d;">
-        Opening WhatsApp…
-      </p>
-    `;
+    h1 { color: #ff4d6d; }
+    h2 { color: #333; }
 
-    // WhatsApp redirect after 2 seconds
-    setTimeout(() => {
-      const phoneNumber = "919133169062"; // <-- replace with YOUR number (country code included)
-      const message = encodeURIComponent(
-        "Hey ❤️ I just said YES! You made my day 🥰"
-      );
-      window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
-    }, 2000);
-  }
+    .buttons {
+      position: relative;
+      height: 70px;
+      margin-top: 20px;
+    }
 
-  /* Floating hearts generator */
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "💕";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 4 + Math.random() * 3 + "s";
-    document.body.appendChild(heart);
+    button {
+      padding: 12px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
 
-    setTimeout(() => {
-      heart.remove();
-    }, 7000);
-  }
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
 
-  setInterval(createHeart, 500);
-</script>
+    #no {
+      background: #ddd;
+      position: absolute;
+      left: 55%;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Hima Darsini Reddy 💕</h1>
+    <h2>Will you be my Valentine?</h2>
+
+    <div class="buttons">
+      <button id="yes" onclick="sayYes()">Yes 💖</button>
+      <button id="no">No 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+
+    function moveNo() {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 60 - 30;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+
+    function sayYes() {
+      const card = document.querySelector(".card");
+      card.innerHTML = `
+        <h1>Hima Darsini Reddy 💕</h1>
+        <h2>You just made my heart smile 🥰<br><br>
+        I can’t wait to create beautiful memories with you 💖</h2>
+        <p style="color:#ff4d6d;">Opening WhatsApp…</p>
+      `;
+
+      setTimeout(() => {
+        const phoneNumber = "919133169062"; // <-- REPLACE WITH YOUR NUMBER
+        const message = encodeURIComponent(
+          "Hey ❤️ I just said YES! You made my day 🥰"
+        );
+        window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+      }, 2000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💕";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+
+</body>
+</html>
